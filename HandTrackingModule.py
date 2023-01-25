@@ -7,15 +7,16 @@ import math
 
 class handDetector():
 
-    def __init__(self, mode=False, maxHands=2, detect_conf=0.5, track_conf = 0.5):
+    def __init__(self, mode=False, maxHands=2, modelComplexity=1, detectionCon=0.5, trackCon = 0.5):
         self.mode = mode
         self.maxHands = maxHands
-        self.detect_conf = detect_conf
-        self.track_conf = track_conf
+        self.detectionCon = detectionCon
+        self.trackCon = trackCon
+        self.modelComplex = modelComplexity
 
         self.mpHands = mp.solutions.hands
-        self.hands = self.mpHands.Hands(self.mode, self.maxHands,
-                                        self.detect_conf, self.track_conf)
+        self.hands = self.mpHands.Hands(self.mode, self.maxHands, self.modelComplex,
+                                        self.detectionCon, self.trackCon)
         self.mpDraw = mp.solutions.drawing_utils
         self.pTime = 0
 
@@ -120,7 +121,7 @@ def main():
     cap.set(3, 1280)
     cap.set(4, 720)
 
-    detector = handDetector( detect_conf=0.85)
+    detector = handDetector(detectionCon=0.85)
 
     if not cap.isOpened():
         print("Camera can not be opened")

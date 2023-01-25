@@ -9,10 +9,10 @@ cap = cv.VideoCapture(0)
 cap.set(3, 1280)
 cap.set(4, 720)
 
-detector = htm.handDetector(detect_conf=0.85, track_conf=0.7)
+detector = htm.handDetector(detectionCon=0.85, trackCon=0.7)
 img = 1 #Colour number or image number
 
-header = cv.imread(cv.samples.findFile(f"PaintHeaders\\{img}.png")) # Top image
+# header = cv.imread(cv.samples.findFile(f"PaintHeaders\\{img}.png")) # Top image
 
 #Check is camera is open
 if not cap.isOpened():
@@ -75,7 +75,7 @@ while True:
                 img = 7
         
         #change header image
-        header = cv.imread(cv.samples.findFile(f"PaintHeaders\\{img}.png"))
+        # header = cv.imread(cv.samples.findFile(f"PaintHeaders\\{img}.png"))
         
     #draw mode (1 finger raised)
     if detector.isFingerOpen(frame, 1) and detector.isFingerOpen(frame, 2) == False:
@@ -96,7 +96,7 @@ while True:
     
     #add the header image
     top = frame[0:120, 0:1280]
-    top = cv.addWeighted(header, 1, top, 0.3, 1)
+    # top = cv.addWeighted(header, 1, top, 0.3, 1)
     frame[0:120, 0:1280] = top
 
     cv.imshow("Paint", frame)
